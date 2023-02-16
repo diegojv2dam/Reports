@@ -53,15 +53,15 @@ public class JasperTestFX extends Application {
 
     JasperPrint jasperPrint;
 
+    String nombreReport;
     JasperTestLoader jtl;
 
     JRViewer jrv;
 
     @Override
     public void start(Stage primaryStage) {
-
-        jtl = new JasperTestLoader();
-        jasperPrint = jtl.getJasperPrint();
+        nombreReport="Report_diego_1.jrxml";
+        
         combo.add("Report Diego");
         combo.add("Report Víctor");
         comboBox.setItems(combo);
@@ -71,33 +71,22 @@ public class JasperTestFX extends Application {
         btn.setOnAction((e) -> loadReport());
 
         comboBox.setOnAction((e) -> {
-            if (comboBox.getValue() == "Report Diego") {
-
-                try {
-                    jtl.load();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(JasperTestFX.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(JasperTestFX.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (JRException ex) {
-                    Logger.getLogger(JasperTestFX.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                jasperPrint = jtl.getJasperPrint();
-                jrv = new JRViewer(jasperPrint);
-
+            if ("Report Diego".equals(comboBox.getValue())) {
+                nombreReport="Report_diego_1.jrxml";
+            } else {
+                nombreReport="Report_victor_2.jrxml";
             }
+
         });
-        
-        
+
         //Boton imprimir
-        print.setOnAction((e) -> {
-            try {
-                JasperPrintManager.printReport(jasperPrint, true);
-            } catch (Exception ex) {
-                Logger.getLogger(JasperTestSwing.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
-
+        print.setOnMouseClicked((e) -> {
+        jasperPrint = jtl.getJasperPrint();
+           try {
+            JasperPrintManager.printReport(jasperPrint, true);
+        } catch (Exception ex ){
+            Logger.getLogger(JasperTestSwing.class.getName()).log(Level.SEVERE, null, ex);
+        }
         });
         up.getChildren().add(print);
 
@@ -114,6 +103,7 @@ public class JasperTestFX extends Application {
 
     private void loadReport() {
         setLoadingUI();
+        jtl = new JasperTestLoader(nombreReport);
         startLoadTask();
     }
 
@@ -140,7 +130,7 @@ public class JasperTestFX extends Application {
                     file = File.createTempFile("report", ".html");
 
                     // Crea el fichero HTML
-                    JasperTestLoader jtl = new JasperTestLoader();
+                    
                     jtl.load();
 
                     JasperPrint jasperPrint = jtl.getJasperPrint();

@@ -34,17 +34,22 @@ public class JasperTestLoader {
 //    private static final String REPORT_JXML = "report2.jrxml"; //"resources/reports/report3.jrxml";   
 //    private static final String SUBREPORT_JXML = "report2_subreport1.jrxml";
     private static final String REPORT_JXML = "Report_diego_1.jrxml"; //"resources/reports/report3.jrxml";   
-//    private static final String SUBREPORT_JXML = "report2_subreport1.jrxml";    
+//    private static final String SUBREPORT_JXML = "report2_subreport1.jrxml";  
+    private String reportJxml;
 
     private JasperReport reporte;
     private JasperPrint jasperPrint;
+
+    JasperTestLoader(String reportJxml) {
+        this.reportJxml = reportJxml;
+    }
     
     public void load() throws ClassNotFoundException, SQLException, JRException {
 //        Class.forName("com.mysql.jdbc.Driver");
         Class.forName("org.postgresql.Driver");
         Connection conexion = (Connection) DriverManager.getConnection(CON_STR, USER, PASS);
 
-        JasperDesign jasperDesign = JRXmlLoader.load(getClass().getResourceAsStream(REPORT_JXML)); //new File(REPORT_JXML)
+        JasperDesign jasperDesign = JRXmlLoader.load(getClass().getResourceAsStream(reportJxml)); //new File(REPORT_JXML)
         reporte = JasperCompileManager.compileReport(jasperDesign);
         
         // Sencillo
@@ -72,5 +77,10 @@ public class JasperTestLoader {
 
     public JasperPrint getJasperPrint() {
         return jasperPrint;
-    }    
+    }
+    
+public void setJasperPrint(String report) throws JRException{
+    JasperDesign jasperDesign = JRXmlLoader.load(getClass().getResourceAsStream(report));
+    this.reporte = JasperCompileManager.compileReport(jasperDesign);
+}    
 }

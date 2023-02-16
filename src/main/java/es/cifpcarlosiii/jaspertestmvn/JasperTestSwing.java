@@ -183,7 +183,7 @@ public class JasperTestSwing extends javax.swing.JFrame {
 
         @Override
         protected Void doInBackground() throws Exception {
-            JasperTestLoader jtl = new JasperTestLoader();
+            JasperTestLoader jtl = new JasperTestLoader("Report_diego_1.jrxml");
             jtl.load();
 
             jasperPrint = jtl.getJasperPrint();
