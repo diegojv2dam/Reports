@@ -197,14 +197,14 @@ FROM product_template
 		<band height="380" splitType="Stretch">
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="5" y="10" width="545" height="370" uuid="09988680-621d-4516-a742-cbfb7813f12f"/>
+					<reportElement x="5" y="10" width="545" height="370" uuid="a18075be-2add-4fdb-8c75-8c5f4d0d854b"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
-					<dataset resetType="Report"/>
-					<keyExpression><![CDATA[$F{nameprod}]]></keyExpression>
+					<dataset resetType="Report" incrementType="Group" incrementGroup="Group1"/>
+					<keyExpression><![CDATA[$F{id}+"."+$F{name}]]></keyExpression>
 					<valueExpression><![CDATA[$V{CuentaCategorias}]]></valueExpression>
 					<labelExpression><![CDATA[$F{name}]]></labelExpression>
 				</pieDataset>

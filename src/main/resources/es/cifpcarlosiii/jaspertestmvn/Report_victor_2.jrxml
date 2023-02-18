@@ -201,14 +201,14 @@ FROM product_template
 		<band height="400" splitType="Stretch">
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="-10" y="20" width="565" height="380" uuid="33bd31ef-cc68-4288-98dd-ba2352783ee5"/>
+					<reportElement x="-10" y="20" width="565" height="380" uuid="37bda27a-820f-45e1-97d4-3bd0c5469037"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
-					<dataset resetType="Report"/>
-					<keyExpression><![CDATA[$F{name}]]></keyExpression>
+					<dataset resetType="Report" incrementType="Group" incrementGroup="Group1"/>
+					<keyExpression><![CDATA[$F{id}]]></keyExpression>
 					<valueExpression><![CDATA[$V{countId}]]></valueExpression>
 					<labelExpression><![CDATA[$F{name}]]></labelExpression>
 				</pieDataset>
